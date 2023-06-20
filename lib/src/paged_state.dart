@@ -20,7 +20,7 @@ class PagedState<PageKeyType, ItemType> {
 
   PagedState<PageKeyType, ItemType> copyWith(
       {List<ItemType>? records,
-      dynamic error,
+      Object? error,
       dynamic nextPageKey = undefined,
       List<PageKeyType>? previousPageKeys}) {
     return PagedState<PageKeyType, ItemType>(

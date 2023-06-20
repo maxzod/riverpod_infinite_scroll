@@ -21,7 +21,7 @@ class PagedNotifier<PageKeyType, ItemType>
   final NextPageKeyBuilder<PageKeyType, ItemType> nextPageKeyBuilder;
 
   /// A builder for providing a custom error string
-  final dynamic Function(dynamic error)? errorBuilder;
+  final Object Function(Object error)? errorBuilder;
 
   /// A builder for providing a custom error string
   final bool printStackTrace;
@@ -56,11 +56,11 @@ class PagedNotifier<PageKeyType, ItemType>
     } catch (e, stacktrace) {
       if (mounted) {
         state = state.copyWith(
-            error: errorBuilder != null
-                ? errorBuilder!(e)
-                : 'An error occurred. Please try again.');
+            error: errorBuilder != null ? errorBuilder!(e) : e.toString());
         debugPrint(e.toString());
-        if (printStackTrace) { debugPrint(stacktrace.toString()); }
+        if (printStackTrace) {
+          debugPrint(stacktrace.toString());
+        }
       }
     }
     return null;
